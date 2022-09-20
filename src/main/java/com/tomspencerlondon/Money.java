@@ -1,6 +1,6 @@
 package com.tomspencerlondon;
 
-public class Money {
+public class Money extends ValueObject<Money> {
 
   int oneCentCount;
   int fiveCentCount;
@@ -29,5 +29,27 @@ public class Money {
         money1.oneDollarCount + money2.oneDollarCount,
         money1.fiveDollarCount + money2.fiveDollarCount,
         money1.twentyDollarCount + money2.twentyDollarCount);
+  }
+
+  @Override
+  protected int getHashCodeCore() {
+    int hashCode = oneCentCount;
+    hashCode = (hashCode * 397) ^ fiveCentCount;
+    hashCode = (hashCode * 397) ^ tenCentCount;
+    hashCode = (hashCode * 397) ^ quarterCount;
+    hashCode = (hashCode * 397) ^ oneDollarCount;
+    hashCode = (hashCode * 397) ^ fiveDollarCount;
+    hashCode = (hashCode * 397) ^ twentyDollarCount;
+    return hashCode;
+  }
+
+  @Override
+  protected boolean equalsCore(Money other) {
+    return oneCentCount == other.oneCentCount
+    && tenCentCount == other.tenCentCount
+    && quarterCount == other.quarterCount
+    && oneDollarCount == other.oneDollarCount
+    && fiveDollarCount == other.fiveDollarCount
+    && twentyDollarCount == other.oneCentCount;
   }
 }
