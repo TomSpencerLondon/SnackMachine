@@ -42,6 +42,27 @@ public class MoneyTest {
     }).isInstanceOf(IllegalArgumentException.class);
   }
 
+  @ParameterizedTest
+  @MethodSource("decimalNumbers")
+  void amountIsCreatedCorrectly(int[] input, double expected) {
+    Money money = new Money(input[0], input[1], input[2], input[3], input[4], input[5], input[6]);
+
+    assertThat(money.amount())
+        .isEqualTo(expected);
+  }
+
+  public static Stream<Arguments> decimalNumbers() {
+    return Stream.of(Arguments.of(new int[]{0, 0, 0, 0, 0, 0, 0}, 0.0),
+        Arguments.of(new int[]{1, 0, 0, 0, 0, 0, 0}, 0.01),
+        Arguments.of(new int[]{1, 2, 0, 0, 0, 0, 0}, 0.11),
+        Arguments.of(new int[]{1, 2, 3, 0, 0, 0, 0}, 0.41),
+        Arguments.of(new int[]{1, 2, 3, 4, 0, 0, 0}, 1.41),
+        Arguments.of(new int[]{1, 2, 3, 4, 5, 0, 0}, 6.41),
+        Arguments.of(new int[]{1, 2, 3, 4, 5, 6, 0}, 36.41),
+        Arguments.of(new int[]{11, 0, 0, 0, 0, 0, 0}, 0.11),
+        Arguments.of(new int[]{110, 0, 0, 0, 100, 0, 0}, 101.10));
+  }
+
   public static Stream<Arguments> numbers() {
     return Stream.of(
         Arguments.of(new int[]{-1, 0, 0, 0, 0, 0, 0}),

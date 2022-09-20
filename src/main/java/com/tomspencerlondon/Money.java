@@ -1,5 +1,8 @@
 package com.tomspencerlondon;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Money extends ValueObject<Money> {
 
   int oneCentCount;
@@ -101,5 +104,18 @@ public class Money extends ValueObject<Money> {
   @Override
   public String toString() {
     return "Money{" + "oneCentCount=" + oneCentCount + ", fiveCentCount=" + fiveCentCount + ", tenCentCount=" + tenCentCount + ", quarterCount=" + quarterCount + ", oneDollarCount=" + oneDollarCount + ", fiveDollarCount=" + fiveDollarCount + ", twentyDollarCount=" + twentyDollarCount + '}';
+  }
+
+  public double amount() {
+    double value = oneCentCount * 0.01 +
+        fiveCentCount * 0.05 +
+        tenCentCount * 0.10 +
+        quarterCount *  0.25 +
+        oneDollarCount +
+        fiveDollarCount * 5 +
+        twentyDollarCount * 20;
+    BigDecimal bd = BigDecimal.valueOf(value);
+    bd = bd.setScale(2, RoundingMode.HALF_UP);
+    return bd.doubleValue();
   }
 }
