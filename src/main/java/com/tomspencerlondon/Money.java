@@ -32,24 +32,56 @@ public class Money extends ValueObject<Money> {
   }
 
   @Override
-  protected int getHashCodeCore() {
-    int hashCode = oneCentCount;
-    hashCode = (hashCode * 397) ^ fiveCentCount;
-    hashCode = (hashCode * 397) ^ tenCentCount;
-    hashCode = (hashCode * 397) ^ quarterCount;
-    hashCode = (hashCode * 397) ^ oneDollarCount;
-    hashCode = (hashCode * 397) ^ fiveDollarCount;
-    hashCode = (hashCode * 397) ^ twentyDollarCount;
-    return hashCode;
+  public int getHashCodeCore() {
+    int result = oneCentCount;
+    result = 31 * result + fiveCentCount;
+    result = 31 * result + tenCentCount;
+    result = 31 * result + quarterCount;
+    result = 31 * result + oneDollarCount;
+    result = 31 * result + fiveDollarCount;
+    result = 31 * result + twentyDollarCount;
+    return result;
   }
 
   @Override
   protected boolean equalsCore(Money other) {
-    return oneCentCount == other.oneCentCount
-    && tenCentCount == other.tenCentCount
-    && quarterCount == other.quarterCount
-    && oneDollarCount == other.oneDollarCount
-    && fiveDollarCount == other.fiveDollarCount
-    && twentyDollarCount == other.oneCentCount;
+    Money money = (Money) other;
+
+    if (oneCentCount != money.oneCentCount) {
+      return false;
+    }
+    if (fiveCentCount != money.fiveCentCount) {
+      return false;
+    }
+    if (tenCentCount != money.tenCentCount) {
+      return false;
+    }
+    if (quarterCount != money.quarterCount) {
+      return false;
+    }
+    if (oneDollarCount != money.oneDollarCount) {
+      return false;
+    }
+    if (fiveDollarCount != money.fiveDollarCount) {
+      return false;
+    }
+    return twentyDollarCount == money.twentyDollarCount;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = oneCentCount;
+    result = 31 * result + fiveCentCount;
+    result = 31 * result + tenCentCount;
+    result = 31 * result + quarterCount;
+    result = 31 * result + oneDollarCount;
+    result = 31 * result + fiveDollarCount;
+    result = 31 * result + twentyDollarCount;
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "Money{" + "oneCentCount=" + oneCentCount + ", fiveCentCount=" + fiveCentCount + ", tenCentCount=" + tenCentCount + ", quarterCount=" + quarterCount + ", oneDollarCount=" + oneDollarCount + ", fiveDollarCount=" + fiveDollarCount + ", twentyDollarCount=" + twentyDollarCount + '}';
   }
 }

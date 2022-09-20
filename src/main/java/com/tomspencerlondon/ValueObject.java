@@ -19,5 +19,7 @@ public abstract class ValueObject<T> {
     return equalsCore(valueObject);
   }
 
+
+
   protected abstract boolean equalsCore(T obj);
 }
