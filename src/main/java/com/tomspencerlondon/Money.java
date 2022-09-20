@@ -52,6 +52,17 @@ public class Money extends ValueObject<Money> {
         money1.twentyDollarCount + money2.twentyDollarCount);
   }
 
+  public static Money subtract(Money money1, Money money2) {
+    return new Money(
+        money1.oneCentCount - money2.oneCentCount,
+        money1.fiveCentCount - money2.fiveCentCount,
+        money1.tenCentCount - money2.tenCentCount,
+        money1.quarterCount - money2.quarterCount,
+        money1.oneDollarCount - money2.oneDollarCount,
+        money1.fiveDollarCount - money2.fiveDollarCount,
+        money1.twentyDollarCount - money2.twentyDollarCount);
+  }
+
   @Override
   public int getHashCodeCore() {
     int result = oneCentCount;

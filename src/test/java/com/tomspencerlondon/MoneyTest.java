@@ -1,6 +1,7 @@
 package com.tomspencerlondon;
 
 import static com.tomspencerlondon.Money.plus;
+import static com.tomspencerlondon.Money.subtract;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -32,6 +33,17 @@ public class MoneyTest {
         .isNotEqualTo(hundredCents);
     assertThat(dollar.hashCode())
         .isNotEqualTo(hundredCents.hashCode());
+  }
+
+  @Test
+  void subtraction_of_two_moneys_produces_correct_result() {
+    Money money1 = new Money(10, 10, 10, 10, 10, 10, 10);
+    Money money2 = new Money(1, 2, 3, 4, 5, 6, 7);
+
+    Money result = subtract(money1, money2);
+
+    assertThat(result)
+        .isEqualTo(new Money(9, 8, 7, 6, 5, 4, 3));
   }
 
   @ParameterizedTest
