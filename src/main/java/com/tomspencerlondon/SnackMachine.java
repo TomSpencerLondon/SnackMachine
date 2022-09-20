@@ -1,5 +1,8 @@
 package com.tomspencerlondon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SnackMachine extends Entity {
   Money moneyInside;
   Money moneyInTransaction;
@@ -10,6 +13,10 @@ public class SnackMachine extends Entity {
   }
 
   public void insertMoney(Money money) {
+    List<Money> accepted = List.of(Money.ONE_CENT, Money.TEN_CENT, Money.QUARTER_CENT, Money.ONE_DOLLAR, Money.ONE_DOLLAR, Money.FIVE_DOLLAR, Money.TWENTY_DOLLAR);
+    if (!accepted.contains(money)) {
+      throw new IllegalArgumentException();
+    }
     moneyInTransaction = Money.plus(moneyInTransaction, money);
   }
 
