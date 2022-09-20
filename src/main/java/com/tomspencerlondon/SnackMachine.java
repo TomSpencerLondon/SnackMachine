@@ -1,6 +1,6 @@
 package com.tomspencerlondon;
 
-public class SnackMachine {
+public class SnackMachine extends Entity {
   Money moneyInside;
   Money moneyInTransaction;
 
