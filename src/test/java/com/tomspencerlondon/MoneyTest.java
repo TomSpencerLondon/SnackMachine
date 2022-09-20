@@ -2,8 +2,13 @@ package com.tomspencerlondon;
 
 import static com.tomspencerlondon.Money.plus;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class MoneyTest {
 
@@ -27,5 +32,25 @@ public class MoneyTest {
         .isNotEqualTo(hundredCents);
     assertThat(dollar.hashCode())
         .isNotEqualTo(hundredCents.hashCode());
+  }
+
+  @ParameterizedTest
+  @MethodSource("numbers")
+  void cannot_create_money_with_negative_value(int[] input) {
+    assertThatThrownBy(() -> {
+      new Money(input[0],input[1], input[2], input[3], input[4], input[5], input[6]);
+    }).isInstanceOf(IllegalArgumentException.class);
+  }
+
+  public static Stream<Arguments> numbers() {
+    return Stream.of(
+        Arguments.of(new int[]{-1, 0, 0, 0, 0, 0, 0}),
+        Arguments.of(new int[]{0, -2, 0, 0, 0, 0, 0}),
+        Arguments.of(new int[]{0, 0, -3, 0, 0, 0, 0}),
+        Arguments.of(new int[]{0, 0, 0, -4, 0, 0, 0}),
+        Arguments.of(new int[]{0, 0, 0, 0, -5, 0, 0}),
+        Arguments.of(new int[]{0, 0, 0, 0, 0, -6, 0}),
+        Arguments.of(new int[]{0, 0, 0, 0, 0, 0, -7})
+    );
   }
 }

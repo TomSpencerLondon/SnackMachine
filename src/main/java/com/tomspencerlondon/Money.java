@@ -11,6 +11,16 @@ public class Money extends ValueObject<Money> {
   int twentyDollarCount;
 
   public Money(int oneCentCount, int fiveCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
+    if (oneCentCount < 0 ||
+        fiveCentCount < 0 ||
+        tenCentCount < 0 ||
+        quarterCount < 0 ||
+        oneDollarCount < 0 ||
+        fiveDollarCount < 0 ||
+        twentyDollarCount < 0
+    ) {
+      throw new IllegalArgumentException();
+    }
     this.oneCentCount = oneCentCount;
     this.fiveCentCount = fiveCentCount;
     this.tenCentCount = tenCentCount;
