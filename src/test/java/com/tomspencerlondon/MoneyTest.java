@@ -26,8 +26,8 @@ public class MoneyTest {
 
   @Test
   void two_money_instances_do_not_equal_if_contain_different_money_amounts() {
-    Money dollar = new Money(0, 0, 0, 1, 0, 0, 0);
-    Money hundredCents = new Money(100, 0, 0, 0, 0, 0, 0);
+    Money dollar = Money.ONE_DOLLAR;
+    Money hundredCents = Money.multiply(Money.ONE_DOLLAR, 100);
 
     assertThat(dollar)
         .isNotEqualTo(hundredCents);

@@ -5,6 +5,15 @@ import java.math.RoundingMode;
 
 public class Money extends ValueObject<Money> {
 
+  public static Money ZERO = new Money(0, 0, 0, 0, 0, 0, 0);
+  public static Money ONE_CENT = new Money(1, 0, 0, 0, 0, 0, 0);
+  public static Money FIVE_CENT = new Money(0, 1, 0, 0, 0, 0, 0);
+  public static Money TEN_CENT = new Money(0, 0, 1, 0, 0, 0, 0);
+  public static Money QUARTER_CENT = new Money(0, 0, 0, 1, 0, 0, 0);
+  public static Money ONE_DOLLAR = new Money(0, 0, 0, 0, 1, 0, 0);
+  public static Money FIVE_DOLLAR = new Money(0, 0, 0, 0, 0, 1, 0);
+  public static Money TWENTY_DOLLAR = new Money(0, 0, 0, 0, 0, 0, 1);
+
   int oneCentCount;
   int fiveCentCount;
   int tenCentCount;
@@ -26,6 +35,18 @@ public class Money extends ValueObject<Money> {
     this.oneDollarCount = oneDollarCount;
     this.fiveDollarCount = fiveDollarCount;
     this.twentyDollarCount = twentyDollarCount;
+  }
+
+  public static Money multiply(Money money, int multiplicand) {
+    return new Money(
+        money.oneCentCount * multiplicand,
+        money.fiveCentCount * multiplicand,
+        money.tenCentCount * multiplicand,
+        money.quarterCount * multiplicand,
+        money.oneDollarCount * multiplicand,
+        money.fiveDollarCount * multiplicand,
+        money.twentyDollarCount * multiplicand
+        );
   }
 
   private void requirePositiveCount(int oneCentCount, int fiveCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
