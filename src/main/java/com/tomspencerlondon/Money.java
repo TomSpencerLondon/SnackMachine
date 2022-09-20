@@ -11,6 +11,21 @@ public class Money extends ValueObject<Money> {
   int twentyDollarCount;
 
   public Money(int oneCentCount, int fiveCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
+    requirePositiveCount(
+        oneCentCount, fiveCentCount,
+        tenCentCount, quarterCount,
+        oneDollarCount, fiveDollarCount,
+        twentyDollarCount);
+    this.oneCentCount = oneCentCount;
+    this.fiveCentCount = fiveCentCount;
+    this.tenCentCount = tenCentCount;
+    this.quarterCount = quarterCount;
+    this.oneDollarCount = oneDollarCount;
+    this.fiveDollarCount = fiveDollarCount;
+    this.twentyDollarCount = twentyDollarCount;
+  }
+
+  private void requirePositiveCount(int oneCentCount, int fiveCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
     if (oneCentCount < 0 ||
         fiveCentCount < 0 ||
         tenCentCount < 0 ||
@@ -21,13 +36,6 @@ public class Money extends ValueObject<Money> {
     ) {
       throw new IllegalArgumentException();
     }
-    this.oneCentCount = oneCentCount;
-    this.fiveCentCount = fiveCentCount;
-    this.tenCentCount = tenCentCount;
-    this.quarterCount = quarterCount;
-    this.oneDollarCount = oneDollarCount;
-    this.fiveDollarCount = fiveDollarCount;
-    this.twentyDollarCount = twentyDollarCount;
   }
 
   public static Money plus(Money money1, Money money2) {
