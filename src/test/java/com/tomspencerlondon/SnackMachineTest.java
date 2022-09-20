@@ -16,4 +16,15 @@ public class SnackMachineTest {
     assertThat(snackMachine.moneyInTransaction())
         .isEqualTo(Money.ZERO);
   }
+
+  @Test
+  void inserted_money_goes_to_money_in_transaction() {
+    SnackMachine snackMachine = new SnackMachine();
+
+    snackMachine.insertMoney(Money.ONE_CENT);
+    snackMachine.insertMoney(Money.ONE_DOLLAR);
+
+    assertThat(snackMachine.moneyInTransaction())
+        .isEqualTo(new Money(1, 0, 0, 0, 1, 0, 0));
+  }
 }
