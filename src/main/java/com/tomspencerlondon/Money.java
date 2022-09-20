@@ -1,6 +1,7 @@
 package com.tomspencerlondon;
 
 public class Money {
+
   int oneCentCount;
   int fiveCentCount;
   int tenCentCount;
@@ -20,16 +21,13 @@ public class Money {
   }
 
   public static Money plus(Money money1, Money money2) {
-    Money sum = new Money(
-        money1.oneCentCount += money2.oneCentCount,
-        money1.fiveCentCount += money2.fiveCentCount,
-        money1.tenCentCount += money2.tenCentCount,
-        money1.quarterCount += money2.quarterCount,
-        money1.oneDollarCount += money2.oneDollarCount,
-        money1.fiveDollarCount += money2.fiveDollarCount,
-        money1.twentyDollarCount += money2.twentyDollarCount
-    );
-
-    return sum;
+    return new Money(
+        money1.oneCentCount + money2.oneCentCount,
+        money1.fiveCentCount + money2.fiveCentCount,
+        money1.tenCentCount + money2.tenCentCount,
+        money1.quarterCount + money2.quarterCount,
+        money1.oneDollarCount + money2.oneDollarCount,
+        money1.fiveDollarCount + money2.fiveDollarCount,
+        money1.twentyDollarCount + money2.twentyDollarCount);
   }
 }
