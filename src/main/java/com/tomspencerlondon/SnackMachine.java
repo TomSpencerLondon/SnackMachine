@@ -3,6 +3,12 @@ package com.tomspencerlondon;
 import java.util.List;
 
 public class SnackMachine extends Entity {
+
+  private final List<Money> accepted = List.of(
+      Money.ONE_CENT, Money.TEN_CENT,
+      Money.QUARTER_CENT, Money.ONE_DOLLAR,
+      Money.ONE_DOLLAR, Money.FIVE_DOLLAR,
+      Money.TWENTY_DOLLAR);
   Money moneyInside;
   Money moneyInTransaction;
 
@@ -12,7 +18,6 @@ public class SnackMachine extends Entity {
   }
 
   public void insertMoney(Money money) {
-    List<Money> accepted = List.of(Money.ONE_CENT, Money.TEN_CENT, Money.QUARTER_CENT, Money.ONE_DOLLAR, Money.ONE_DOLLAR, Money.FIVE_DOLLAR, Money.TWENTY_DOLLAR);
     if (!accepted.contains(money)) {
       throw new IllegalArgumentException();
     }
