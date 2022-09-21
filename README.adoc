@@ -2,4 +2,4 @@
 Practice with Vladimir Khorikov Domain Driven Design In Practice (pluralsight)
 https://app.pluralsight.com/library/courses/domain-driven-design-in-practice
 
-image::https://media.giphy.com/media/p9y4utzoFRcaP4YyqN/giphy.gif[]
+image::https://media.giphy.com/media/DnCcIEr4LaKRKq1Tir/giphy.gif[]
