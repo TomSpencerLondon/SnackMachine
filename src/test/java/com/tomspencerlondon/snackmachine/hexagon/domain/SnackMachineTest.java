@@ -1,12 +1,10 @@
-package com.tomspencerlondon.hexagon.domain;
+package com.tomspencerlondon.snackmachine.hexagon.domain;
 
-import static com.tomspencerlondon.hexagon.domain.Money.multiply;
-import static com.tomspencerlondon.hexagon.domain.Money.plus;
+import static com.tomspencerlondon.snackmachine.hexagon.domain.Money.multiply;
+import static com.tomspencerlondon.snackmachine.hexagon.domain.Money.plus;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.tomspencerlondon.hexagon.domain.Money;
-import com.tomspencerlondon.hexagon.domain.SnackMachine;
 import org.junit.jupiter.api.Test;
 
 public class SnackMachineTest {

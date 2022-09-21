@@ -1,6 +1,6 @@
-package com.tomspencerlondon.adapter.in;
+package com.tomspencerlondon.snackmachine.adapter.in.web;
 
-import com.tomspencerlondon.hexagon.domain.Money;
+import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
 import java.text.NumberFormat;
 import java.util.Locale;
 

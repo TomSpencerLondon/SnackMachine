@@ -1,7 +1,7 @@
-package com.tomspencerlondon.hexagon.application;
+package com.tomspencerlondon.snackmachine.hexagon.application;
 
-import com.tomspencerlondon.hexagon.domain.Money;
-import com.tomspencerlondon.hexagon.domain.SnackMachine;
+import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
+import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 
 public class SnackService {
 

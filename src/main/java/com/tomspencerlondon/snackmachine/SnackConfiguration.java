@@ -1,7 +1,7 @@
-package com.tomspencerlondon;
+package com.tomspencerlondon.snackmachine;
 
-import com.tomspencerlondon.hexagon.application.SnackService;
-import com.tomspencerlondon.hexagon.domain.SnackMachine;
+import com.tomspencerlondon.snackmachine.hexagon.application.SnackService;
+import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

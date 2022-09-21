@@ -1,7 +1,7 @@
-package com.tomspencerlondon.adapter.in;
+package com.tomspencerlondon.snackmachine.adapter.in.web;
 
-import com.tomspencerlondon.hexagon.application.SnackService;
-import com.tomspencerlondon.hexagon.domain.Money;
+import com.tomspencerlondon.snackmachine.hexagon.application.SnackService;
+import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
