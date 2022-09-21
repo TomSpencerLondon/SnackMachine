@@ -23,7 +23,7 @@ public class SnackController {
   @GetMapping("/")
   public String index(Model model) {
     Money moneyInTransaction = snackService.moneyInserted();
-    Money moneyInside = snackService.moneyInside();
+    Money moneyInside = Money.plus(snackService.moneyInside(), snackService.moneyInserted());
     model.addAttribute("machine", SnackMachineView.from(moneyInTransaction, moneyInside));
     return "index";
   }
@@ -31,6 +31,12 @@ public class SnackController {
   @PostMapping("/insert")
   public String insert(@RequestParam(name="coin") String coin) {
     snackService.insert(coin);
+    return "redirect:/";
+  }
+
+  @PostMapping("/return")
+  public String returnMoney() {
+    snackService.returnMoney();
     return "redirect:/";
   }
 }

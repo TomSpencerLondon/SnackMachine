@@ -41,13 +41,16 @@
       20 dollars
     </button>
     </div>
-    <div class="mx-auto">
-      <button class="bg-slate-500	hover:bg-slate-700 text-white font-bold mt-4 py-2 px-4 border border-slate-700 rounded">
-        Return money
-      </button>
-    </div>
   </form>
-
+  <form th:action="@{/return}"
+        method="post"
+  >
+  <div class="mx-auto">
+    <button class="bg-slate-500	hover:bg-slate-700 text-white font-bold mt-4 py-2 px-4 border border-slate-700 rounded">
+      Return money
+    </button>
+  </div>
+  </form>
   <h2 class="mt-4 text-2xl">Money Inside</h2>
   <h2 class="mt-4 text-2xl" th:text="${machine.moneyInside}">$20</h2>
 </main>

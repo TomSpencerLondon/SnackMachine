@@ -35,4 +35,8 @@ public class SnackService {
       default: return Money.ZERO;
     }
   }
+
+  public void returnMoney() {
+    snackMachine.returnMoney();
+  }
 }
