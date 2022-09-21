@@ -10,6 +10,14 @@
 <body>
 <main class="pt-8 text-center">
   <h1 class="mb-4 text-3xl font-bold uppercase">Snack Machine</h1>
+  <form class="mb-4" th:action="@{/buy}"
+        method="post"
+  >
+    <button class="bg-lime-500 hover:bg-lime-700 text-white font-bold mt-4 py-2 px-4 border border-lime-700 rounded"
+            th:type="submit" name="coin" th:value="${machine.moneyInserted}">
+      Buy a Snack
+    </button>
+  </form>
   <h2 class="mb-4 text-2xl">Money Inserted</h2>
   <h2 class="mt-4 mb-4 text-2xl" th:text="${machine.moneyInserted}">$10</h2>
   <form th:action="@{/insert}"

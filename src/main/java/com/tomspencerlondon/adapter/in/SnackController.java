@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -31,6 +30,12 @@ public class SnackController {
   @PostMapping("/insert")
   public String insert(@RequestParam(name="coin") String coin) {
     snackService.insert(coin);
+    return "redirect:/";
+  }
+
+  @PostMapping("/buy")
+  public String buy(@RequestParam(name="coin") String coin) {
+    snackService.buySnack();
     return "redirect:/";
   }
 

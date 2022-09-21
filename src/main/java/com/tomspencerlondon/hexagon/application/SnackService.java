@@ -39,4 +39,8 @@ public class SnackService {
   public void returnMoney() {
     snackMachine.returnMoney();
   }
+
+  public void buySnack() {
+    snackMachine.buySnack();
+  }
 }
