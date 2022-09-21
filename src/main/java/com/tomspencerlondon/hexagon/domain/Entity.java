@@ -1,4 +1,4 @@
-package com.tomspencerlondon;
+package com.tomspencerlondon.hexagon.domain;
 
 public abstract class Entity {
   long id;

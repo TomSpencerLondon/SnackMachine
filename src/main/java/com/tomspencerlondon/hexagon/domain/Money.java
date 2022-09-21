@@ -1,4 +1,4 @@
-package com.tomspencerlondon;
+package com.tomspencerlondon.hexagon.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

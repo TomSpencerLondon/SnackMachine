@@ -1,10 +1,11 @@
-package com.tomspencerlondon;
+package com.tomspencerlondon.hexagon.domain;
 
-import static com.tomspencerlondon.Money.plus;
-import static com.tomspencerlondon.Money.subtract;
+import static com.tomspencerlondon.hexagon.domain.Money.plus;
+import static com.tomspencerlondon.hexagon.domain.Money.subtract;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.tomspencerlondon.hexagon.domain.Money;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

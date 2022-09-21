@@ -1,4 +1,4 @@
-package com.tomspencerlondon;
+package com.tomspencerlondon.hexagon.domain;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class SnackMachine extends Entity {
   private final List<Money> accepted = List.of(
       Money.ONE_CENT, Money.TEN_CENT,
       Money.QUARTER_CENT, Money.ONE_DOLLAR,
-      Money.ONE_DOLLAR, Money.FIVE_DOLLAR,
+      Money.FIVE_DOLLAR,
       Money.TWENTY_DOLLAR);
   private Money moneyInside;
   private Money moneyInTransaction;
