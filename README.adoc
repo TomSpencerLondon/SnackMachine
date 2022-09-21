@@ -1,3 +1,5 @@
-# SnackMachine
+== SnackMachine
 Practice with Vladimir Khorikov Domain Driven Design In Practice (pluralsight)
 https://app.pluralsight.com/library/courses/domain-driven-design-in-practice
+
+image::https://media.giphy.com/media/yuyxqElzJpaQLBO59W/giphy.gif[]
