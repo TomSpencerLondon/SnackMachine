@@ -9,8 +9,8 @@ public class SnackMachine extends Entity {
       Money.QUARTER_CENT, Money.ONE_DOLLAR,
       Money.ONE_DOLLAR, Money.FIVE_DOLLAR,
       Money.TWENTY_DOLLAR);
-  Money moneyInside;
-  Money moneyInTransaction;
+  private Money moneyInside;
+  private Money moneyInTransaction;
 
   public SnackMachine() {
     moneyInside = Money.ZERO;

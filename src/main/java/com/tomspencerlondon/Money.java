@@ -14,13 +14,13 @@ public class Money extends ValueObject<Money> {
   public static Money FIVE_DOLLAR = new Money(0, 0, 0, 0, 0, 1, 0);
   public static Money TWENTY_DOLLAR = new Money(0, 0, 0, 0, 0, 0, 1);
 
-  int oneCentCount;
-  int fiveCentCount;
-  int tenCentCount;
-  int quarterCount;
-  int oneDollarCount;
-  int fiveDollarCount;
-  int twentyDollarCount;
+  private final int oneCentCount;
+  private final int fiveCentCount;
+  private final int tenCentCount;
+  private final int quarterCount;
+  private final int oneDollarCount;
+  private final int fiveDollarCount;
+  private final int twentyDollarCount;
 
   public Money(int oneCentCount, int fiveCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
     requirePositiveCount(
