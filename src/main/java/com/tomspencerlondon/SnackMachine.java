@@ -1,6 +1,5 @@
 package com.tomspencerlondon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SnackMachine extends Entity {
