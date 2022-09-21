@@ -1,5 +1,6 @@
 package com.tomspencerlondon;
 
+import static com.tomspencerlondon.Money.multiply;
 import static com.tomspencerlondon.Money.plus;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -37,5 +38,20 @@ public class SnackMachineTest {
 
     assertThatThrownBy(() -> snackMachine.insertMoney(twoCent))
         .isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  void money_in_transaction_goes_to_money_inside_after_purchase() {
+    SnackMachine snackMachine = new SnackMachine();
+    snackMachine.insertMoney(Money.ONE_DOLLAR);
+    snackMachine.insertMoney(Money.ONE_DOLLAR);
+
+    snackMachine.buySnack();
+
+    assertThat(snackMachine.moneyInTransaction())
+        .isEqualTo(Money.ZERO);
+
+    assertThat(snackMachine.moneyInside())
+        .isEqualTo(multiply(Money.ONE_DOLLAR, 2));
   }
 }

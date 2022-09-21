@@ -26,10 +26,14 @@ public class SnackMachine extends Entity {
 
   public void buySnack() {
     moneyInside = Money.plus(moneyInside, moneyInTransaction);
-    // MoneyInTransaction = 0;
+    moneyInTransaction = Money.ZERO;
   }
 
   public Money moneyInTransaction() {
     return moneyInTransaction;
+  }
+
+  public Money moneyInside() {
+    return moneyInside;
   }
 }
