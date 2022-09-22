@@ -41,6 +41,6 @@ public class SnackService {
   }
 
   public void buySnack() {
-    snackMachine.buySnack();
+    snackMachine.buySnack(1);
   }
 }

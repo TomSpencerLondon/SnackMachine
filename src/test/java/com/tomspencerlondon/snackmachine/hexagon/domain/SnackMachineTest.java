@@ -41,17 +41,18 @@ public class SnackMachineTest {
   }
 
   @Test
-  void money_in_transaction_goes_to_money_inside_after_purchase() {
+  void buySnack_trades_inserted_money_for_a_snack() {
     SnackMachine snackMachine = new SnackMachine();
-    snackMachine.insertMoney(Money.ONE_DOLLAR);
+    snackMachine.loadSnacks(1, new Snack("snack"), 10, 1.0);
     snackMachine.insertMoney(Money.ONE_DOLLAR);
 
-    snackMachine.buySnack();
+    snackMachine.buySnack(1);
 
     assertThat(snackMachine.moneyInTransaction())
         .isEqualTo(Money.ZERO);
-
     assertThat(snackMachine.moneyInside())
-        .isEqualTo(multiply(Money.ONE_DOLLAR, 2));
+        .isEqualTo(multiply(Money.ONE_DOLLAR, 1));
+    assertThat(snackMachine.snackPile(1).get().quantity())
+        .isEqualTo(9);
   }
 }
