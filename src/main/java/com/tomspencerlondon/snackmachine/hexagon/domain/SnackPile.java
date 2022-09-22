@@ -20,9 +20,6 @@ public class SnackPile extends ValueObject<SnackPile> {
     if (price < 0) {
       throw new IllegalArgumentException();
     }
-    if (price % 0.01 > 0) {
-      throw new IllegalArgumentException();
-    }
   }
 
   public Snack snack() {
