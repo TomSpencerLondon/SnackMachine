@@ -6,6 +6,13 @@ public class SnackPile extends ValueObject<SnackPile> {
   private final double price;
 
   public SnackPile(Snack snack, int quantity, double price) {
+    if (quantity < 0) {
+      throw new IllegalArgumentException();
+    }
+    if (price < 0) {
+      throw new IllegalArgumentException();
+    }
+
     this.snack = snack;
     this.quantity = quantity;
     this.price = price;
