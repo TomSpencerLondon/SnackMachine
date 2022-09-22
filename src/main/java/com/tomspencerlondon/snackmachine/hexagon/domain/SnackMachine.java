@@ -2,7 +2,7 @@ package com.tomspencerlondon.snackmachine.hexagon.domain;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class SnackMachine extends AggregateRoot {
 
@@ -16,12 +16,12 @@ public class SnackMachine extends AggregateRoot {
   public SnackMachine() {
     moneyInside = Money.ZERO;
     moneyInTransaction = Money.ZERO;
-    slots = List.of(new Slot(new SnackPile(new Snack("snack"), 1, 0.0), this, 1), new Slot(new SnackPile(new Snack("snack"), 1, 0.0), this, 2), new Slot(new SnackPile(new Snack("snack"), 1, 0.0), this, 3));
+    slots = List.of(new Slot(new SnackPile(new Snack("snack"), 10, 0.0), this, 1), new Slot(new SnackPile(new Snack("snack"), 10, 0.0), this, 2), new Slot(new SnackPile(new Snack("snack"), 10, 0.0), this, 3));
   }
 
   public Optional<SnackPile> snackPile(int position) {
     return getSlot(position)
-        .map(Slot::snackPile).findFirst();
+        .map(Slot::snackPile);
   }
 
   public void insertMoney(Money money) {
@@ -36,14 +36,26 @@ public class SnackMachine extends AggregateRoot {
   }
 
   public void buySnack(int position) {
-    getSlot(position)
-        .forEach(Slot::reduceQuantity);
+    Optional<Slot> slot = getSlot(position);
+
+    if (slot.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+
+    slot.ifPresent(s -> {
+      if (s.snackPile().price() > moneyInTransaction.amount()) {
+        throw new IllegalArgumentException();
+      }
+    });
+
+    slot.map(this::reduceSnackQuantity);
+
     moneyInside = Money.plus(moneyInside, moneyInTransaction);
     moneyInTransaction = Money.ZERO;
   }
 
-  private Stream<Slot> getSlot(int position) {
-    return slots.stream().filter(x -> x.position() == position);
+  private Optional<Slot> getSlot(int position) {
+    return slots.stream().filter(x -> x.position() == position).findFirst();
   }
 
   public Money moneyInTransaction() {
@@ -55,14 +67,24 @@ public class SnackMachine extends AggregateRoot {
   }
 
   public void loadSnacks(int position, Snack snack, int quantity, double price) {
-    slots = getSlot(position)
-        .map(s -> new Slot(
-            new SnackPile(snack, quantity, price),
-            this, position))
-        .toList();
+    Optional<SnackPile> snackPile = getSlot(position)
+        .map(s -> new SnackPile(snack, quantity, price));
+
+    slots = slots.stream().map(s -> {
+      if (s.position() == position && snackPile.isPresent()) {
+        return new Slot(snackPile.get(), s.snackMachine(), s.position());
+      } else {
+        return s;
+      }
+    }).collect(Collectors.toList());
+
   }
 
-  public List<Slot> slots() {
-    return slots;
+  private Slot reduceSnackQuantity(Slot s) {
+    if (s.snackPile().price() > moneyInTransaction.amount()) {
+      throw new IllegalArgumentException();
+    }
+    s.reduceQuantity();
+    return s;
   }
 }
