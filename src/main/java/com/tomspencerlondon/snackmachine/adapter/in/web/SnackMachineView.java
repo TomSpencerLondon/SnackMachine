@@ -1,6 +1,7 @@
 package com.tomspencerlondon.snackmachine.adapter.in.web;
 
 import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
+import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -15,8 +16,8 @@ public class SnackMachineView {
     this.moneyInside = formatter.format(moneyInside.amount());
   }
 
-  public static SnackMachineView from(Money moneyInserted, Money moneyInside) {
-    return new SnackMachineView(moneyInserted, moneyInside);
+  public static SnackMachineView from(SnackMachine snackMachine) {
+    return new SnackMachineView(snackMachine.moneyInTransaction(), Money.plus(snackMachine.moneyInside(), snackMachine.moneyInTransaction()));
   }
 
   public String getMoneyInserted() {

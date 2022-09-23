@@ -5,11 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class SnackMachine extends AggregateRoot {
-
+  private SnackMachineId snackMachineId;
   private final List<Money> accepted = List.of(Money.ONE_CENT, Money.TEN_CENT, Money.QUARTER_CENT, Money.ONE_DOLLAR, Money.FIVE_DOLLAR, Money.TWENTY_DOLLAR);
-
   private List<Slot> slots;
-
   private Money moneyInside;
   private Money moneyInTransaction;
 
@@ -86,5 +84,32 @@ public class SnackMachine extends AggregateRoot {
     }
     s.reduceQuantity();
     return s;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    SnackMachine that = (SnackMachine) o;
+
+    return snackMachineId != null ? snackMachineId.equals(that.snackMachineId) : that.snackMachineId == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return snackMachineId != null ? snackMachineId.hashCode() : 0;
+  }
+
+  public SnackMachineId getId() {
+    return snackMachineId;
+  }
+
+  public void setId(SnackMachineId id) {
+    this.snackMachineId = id;
   }
 }

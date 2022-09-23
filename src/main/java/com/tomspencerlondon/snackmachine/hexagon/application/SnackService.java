@@ -1,46 +1,22 @@
 package com.tomspencerlondon.snackmachine.hexagon.application;
 
-import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
+import com.tomspencerlondon.snackmachine.hexagon.application.port.InMemorySnackMachineRepository;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
+import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachineId;
+import java.util.Optional;
 
 public class SnackService {
+  private InMemorySnackMachineRepository repository;
 
-  private final SnackMachine snackMachine;
-
-  public SnackService(SnackMachine snackMachine) {
-    this.snackMachine = snackMachine;
+  public SnackService(InMemorySnackMachineRepository repository) {
+    this.repository = repository;
   }
 
-  public Money moneyInside() {
-    return snackMachine.moneyInside();
+  public Optional<SnackMachine> findById(SnackMachineId id) {
+    return repository.findById(id);
   }
 
-  public Money moneyInserted() {
-    return snackMachine.moneyInTransaction();
-  }
+  public void save(SnackMachineId id) {
 
-  public void insert(String amount) {
-    snackMachine.insertMoney(money(amount));
-  }
-
-  private Money money(String coin) {
-    switch(coin) {
-      case "1_C": return Money.ONE_CENT;
-      case "5_C": return Money.FIVE_CENT;
-      case "10_C": return Money.TEN_CENT;
-      case "25_C": return Money.QUARTER_CENT;
-      case "1_D": return Money.ONE_DOLLAR;
-      case "5_D": return Money.FIVE_DOLLAR;
-      case "20_D": return Money.TWENTY_DOLLAR;
-      default: return Money.ZERO;
-    }
-  }
-
-  public void returnMoney() {
-    snackMachine.returnMoney();
-  }
-
-  public void buySnack() {
-    snackMachine.buySnack(1);
   }
 }
