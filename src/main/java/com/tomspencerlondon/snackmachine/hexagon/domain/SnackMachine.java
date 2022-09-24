@@ -14,7 +14,7 @@ public class SnackMachine extends AggregateRoot {
   public SnackMachine() {
     moneyInside = Money.ZERO;
     moneyInTransaction = Money.ZERO;
-    slots = List.of(new Slot(new SnackPile(new Snack("snack"), 10, 0.0), this, 1), new Slot(new SnackPile(new Snack("snack"), 10, 0.0), this, 2), new Slot(new SnackPile(new Snack("snack"), 10, 0.0), this, 3));
+    slots = List.of(new Slot(new SnackPile(new Snack("Coke"), 10, 0.0), this, 1), new Slot(new SnackPile(new Snack("Crisps"), 10, 0.0), this, 2), new Slot(new SnackPile(new Snack("Chocolate"), 10, 0.0), this, 3));
   }
 
   public Optional<SnackPile> snackPile(int position) {
