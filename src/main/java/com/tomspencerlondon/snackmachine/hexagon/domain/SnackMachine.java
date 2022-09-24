@@ -53,7 +53,9 @@ public class SnackMachine extends AggregateRoot {
   }
 
   private Optional<Slot> getSlot(int position) {
-    return slots.stream().filter(x -> x.position() == position).findFirst();
+    return slots.stream()
+        .filter(x -> x.position() == position)
+        .findFirst();
   }
 
   public Money moneyInTransaction() {
