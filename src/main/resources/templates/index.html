@@ -8,11 +8,35 @@
   <title>Title</title>
 </head>
 <body>
-<main class="pt-8 text-center">
+<main class="mt-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+  <div class="mx-auto max-w-3xl">
   <h1 class="mb-4 text-3xl font-bold uppercase">Snack Machine</h1>
   <form class="mb-4" th:action="@{/buy}"
         method="post"
   >
+    <div class="grid grid-cols-3">
+      <div>
+        <input type="radio"
+               value="single" id="choice1" name="choiceType" checked="checked"/>
+        <label
+            class="radio"
+            for="choice1">Coke</label>
+      </div>
+      <div>
+        <input type="radio"
+               value="multiple" id="choice2" name="choiceType"/>
+        <label
+            class="radio"
+            for="choice2">Crisps</label>
+      </div>
+      <div>
+        <input type="radio"
+               value="multiple" id="choice3" name="choiceType"/>
+        <label
+            class="radio"
+            for="choice2">Chocolate</label>
+      </div>
+    </div>
     <button class="bg-lime-500 hover:bg-lime-700 text-white font-bold mt-4 py-2 px-4 border border-lime-700 rounded"
             th:type="submit" name="coin" th:value="${machine.moneyInserted}">
       Buy a Snack
@@ -23,44 +47,46 @@
   <form th:action="@{/insert}"
         method="post"
   >
-    <div class="grid grid-cols-3 mx-auto w-64">
-    <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
-            th:type="submit" name="coin" th:value="1_C">
-      1 cent
-    </button>
-    <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
-            th:type="submit" name="coin" th:value="10_C">
-      10 cents
-    </button>
-    <button class="bg-orange-200 font-bold p-4 rounded-full m-1 text-center"
-            th:type="submit" name="coin" th:value="25_C">
-      1/4 dollar
-    </button>
-    <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
-            th:type="submit" name="coin" th:value="1_D">
-      1 dollar
-    </button>
-    <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
-            th:type="submit" name="coin" th:value="5_D">
-      5 dollars
-    </button>
-    <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
-            th:type="submit" name="coin" th:value="20_D">
-      20 dollars
-    </button>
+    <div class="grid grid-cols-3">
+      <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
+              th:type="submit" name="coin" th:value="1_C">
+        1 cent
+      </button>
+      <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
+              th:type="submit" name="coin" th:value="10_C">
+        10 cents
+      </button>
+      <button class="bg-orange-200 font-bold p-4 rounded-full m-1 text-center"
+              th:type="submit" name="coin" th:value="25_C">
+        1/4 dollar
+      </button>
+      <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
+              th:type="submit" name="coin" th:value="1_D">
+        1 dollar
+      </button>
+      <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
+              th:type="submit" name="coin" th:value="5_D">
+        5 dollars
+      </button>
+      <button class="bg-orange-200 font-bold p-4 rounded-full m-1"
+              th:type="submit" name="coin" th:value="20_D">
+        20 dollars
+      </button>
     </div>
   </form>
   <form th:action="@{/return}"
         method="post"
   >
-  <div class="mx-auto">
-    <button class="bg-slate-500	hover:bg-slate-700 text-white font-bold mt-4 py-2 px-4 border border-slate-700 rounded">
-      Return money
-    </button>
-  </div>
+    <div class="mx-auto">
+      <button
+          class="bg-slate-500	hover:bg-slate-700 text-white font-bold mt-4 py-2 px-4 border border-slate-700 rounded">
+        Return money
+      </button>
+    </div>
   </form>
   <h2 class="mt-4 text-2xl">Money Inside</h2>
   <h2 class="mt-4 text-2xl" th:text="${machine.moneyInside}">$20</h2>
+  </div>
 </main>
 </body>
 </html>
