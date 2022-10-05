@@ -3,12 +3,10 @@ package com.tomspencerlondon.snackmachine.hexagon.domain;
 public class Slot extends Entity {
 
   private SnackPile snackPile;
-  private final SnackMachine snackMachine;
   private final int position;
 
-  public Slot(SnackPile snackPile, SnackMachine snackMachine, int position) {
+  public Slot(SnackPile snackPile, int position) {
     this.snackPile = snackPile;
-    this.snackMachine = snackMachine;
     this.position = position;
   }
 
@@ -28,15 +26,11 @@ public class Slot extends Entity {
     return snackPile.price();
   }
 
-  public SnackMachine snackMachine() {
-    return snackMachine;
-  }
-
   public int position() {
     return position;
   }
 
   public void reduceQuantity() {
-    this.snackPile = snackPile.reduceQuantity();
+    snackPile = snackPile.reduceQuantity();
   }
 }

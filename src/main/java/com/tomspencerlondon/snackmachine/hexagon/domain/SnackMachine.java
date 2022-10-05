@@ -11,10 +11,10 @@ public class SnackMachine extends AggregateRoot {
   private Money moneyInside;
   private Money moneyInTransaction;
 
-  public SnackMachine() {
+  public SnackMachine(List<Slot> slots) {
     moneyInside = Money.ZERO;
     moneyInTransaction = Money.ZERO;
-    slots = List.of(new Slot(new SnackPile(new Snack("Coke"), 10, 0.0), this, 1), new Slot(new SnackPile(new Snack("Crisps"), 10, 0.0), this, 2), new Slot(new SnackPile(new Snack("Chocolate"), 10, 0.0), this, 3));
+    this.slots = slots;
   }
 
   public Optional<SnackPile> snackPile(int position) {
@@ -54,7 +54,7 @@ public class SnackMachine extends AggregateRoot {
 
   private Optional<Slot> getSlot(int position) {
     return slots.stream()
-        .filter(x -> x.position() == position)
+        .filter(slot -> slot.position() == position)
         .findFirst();
   }
 
@@ -64,20 +64,6 @@ public class SnackMachine extends AggregateRoot {
 
   public Money moneyInside() {
     return moneyInside;
-  }
-
-  public void loadSnacks(int position, Snack snack, int quantity, double price) {
-    Optional<SnackPile> snackPile = getSlot(position)
-        .map(s -> new SnackPile(snack, quantity, price));
-
-    slots = slots.stream().map(s -> {
-      if (s.position() == position && snackPile.isPresent()) {
-        return new Slot(snackPile.get(), s.snackMachine(), s.position());
-      } else {
-        return s;
-      }
-    }).collect(Collectors.toList());
-
   }
 
   private Slot reduceSnackQuantity(Slot s) {
