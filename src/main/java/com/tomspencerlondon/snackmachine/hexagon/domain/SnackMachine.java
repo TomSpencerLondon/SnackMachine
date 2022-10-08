@@ -7,7 +7,7 @@ import org.jmolecules.ddd.types.Identifier;
 public class SnackMachine implements org.jmolecules.ddd.types.AggregateRoot<SnackMachine, Identifier> {
   private SnackMachineId snackMachineId;
   private final List<Money> accepted = List.of(Money.ONE_CENT, Money.TEN_CENT, Money.QUARTER_CENT, Money.ONE_DOLLAR, Money.FIVE_DOLLAR, Money.TWENTY_DOLLAR);
-  private List<Slot> slots;
+  private final List<Slot> slots;
   private Money moneyInside;
   private Money moneyInTransaction;
 
@@ -104,5 +104,8 @@ public class SnackMachine implements org.jmolecules.ddd.types.AggregateRoot<Snac
   @Override
   public Identifier getId() {
     return this.snackMachineId;
+  }
+
+  public void addSnack(String snack) {
   }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="mx-auto max-w-3xl">
+  <h1 class="mb-4 text-3xl font-bold uppercase">Snack Machine</h1>
+  <form class="mb-4" th:action="@{/snack-machine/__${machine.id}__/add-snack}"
+        method="post"
+  >
+    <div class="grid grid-cols-3">
+      <div>
+        <input type="radio"
+               value="coke" id="choice1" name="snack" checked="checked"/>
+        <label
+            class="radio"
+            for="choice1">Coke</label>
+      </div>
+      <div>
+        <input type="radio"
+               value="crisps" id="choice2" name="snack"/>
+        <label
+            class="radio"
+            for="choice2">Crisps</label>
+      </div>
+      <div>
+        <input
+               type="radio"
+               value="chocolate" id="choice3" name="snack"/>
+        <label
+            class="radio"
+            for="choice2">Chocolate</label>
+      </div>
+    </div>
+    <button class="bg-lime-500 hover:bg-lime-700 text-white font-bold mt-4 py-2 px-4 border border-lime-700 rounded"
+            th:type="submit">
+      Add a Snack
+    </button>
+  </form>
+</body>
+</html>

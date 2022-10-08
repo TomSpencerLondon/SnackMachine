@@ -2,6 +2,7 @@ package com.tomspencerlondon.snackmachine.adapter.in.web;
 
 import com.tomspencerlondon.snackmachine.hexagon.application.SnackService;
 import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
+import com.tomspencerlondon.snackmachine.hexagon.domain.NoSnacksAvailable;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachineId;
 import java.util.List;
@@ -34,6 +35,24 @@ public class SnackController {
     return "index";
   }
 
+  @GetMapping("/snack-machine/{id}/admin")
+  public String admin(Model model, @PathVariable("id") Long id) {
+    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
+    SnackMachineView snackMachineView = snackMachine.map(SnackMachineView::from)
+        .orElseThrow(SnackMachineUnavailable::new);
+    model.addAttribute("machine", snackMachineView);
+    return "admin";
+  }
+
+  @PostMapping("/snack-machine/{id}/add-snack")
+  public String addSnack(@RequestParam(name="snack") String snack, @PathVariable("id") Long id) {
+    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
+
+    snackMachine.ifPresent(sn -> sn.addSnack(snack));
+
+    return "redirect:/snack-machine/" + id + "/admin";
+  }
+
   @GetMapping("/snack-machine/{id}")
   public String snackMachine(Model model, @PathVariable("id") Long id) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
@@ -51,9 +70,13 @@ public class SnackController {
   }
 
   @PostMapping("/snack-machine/{id}/buy")
-  public String buy(@PathVariable("id") Long id) {
+  public String buy(@RequestParam(name="position") Integer position, @PathVariable("id") Long id) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
-    snackMachine.ifPresent(sn -> sn.buySnack(1));
+    try {
+      snackMachine.ifPresent(sn -> sn.buySnack(position));
+    } catch (NoSnacksAvailable e) {
+      return "redirect:/snack-machine/" + id + "/admin/";
+    }
     return "redirect:/snack-machine/" + id;
   }
 
