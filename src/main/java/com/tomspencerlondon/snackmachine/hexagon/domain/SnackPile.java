@@ -1,6 +1,8 @@
 package com.tomspencerlondon.snackmachine.hexagon.domain;
 
-public class SnackPile extends ValueObject<SnackPile> {
+import org.jmolecules.ddd.types.ValueObject;
+
+public class SnackPile implements ValueObject {
   private final Snack snack;
   private final int quantity;
   private final double price;
@@ -46,14 +48,11 @@ public class SnackPile extends ValueObject<SnackPile> {
   }
 
   @Override
-  protected boolean equalsCore(SnackPile o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
     if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    if (!super.equals(o)) {
       return false;
     }
 
@@ -69,10 +68,10 @@ public class SnackPile extends ValueObject<SnackPile> {
   }
 
   @Override
-  protected int getHashCodeCore() {
-    int result = super.hashCode();
+  public int hashCode() {
+    int result;
     long temp;
-    result = 31 * result + snack.hashCode();
+    result = snack.hashCode();
     result = 31 * result + quantity;
     temp = Double.doubleToLongBits(price);
     result = 31 * result + (int) (temp ^ (temp >>> 32));

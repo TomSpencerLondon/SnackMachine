@@ -2,8 +2,9 @@ package com.tomspencerlondon.snackmachine.hexagon.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import org.jmolecules.ddd.types.ValueObject;
 
-public class Money extends ValueObject<Money> {
+public class Money implements ValueObject {
 
   public static Money ZERO = new Money(0, 0, 0, 0, 0, 0, 0);
   public static Money ONE_CENT = new Money(1, 0, 0, 0, 0, 0, 0);
@@ -85,20 +86,15 @@ public class Money extends ValueObject<Money> {
   }
 
   @Override
-  public int getHashCodeCore() {
-    int result = oneCentCount;
-    result = 31 * result + fiveCentCount;
-    result = 31 * result + tenCentCount;
-    result = 31 * result + quarterCount;
-    result = 31 * result + oneDollarCount;
-    result = 31 * result + fiveDollarCount;
-    result = 31 * result + twentyDollarCount;
-    return result;
-  }
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
-  @Override
-  protected boolean equalsCore(Money other) {
-    Money money = (Money) other;
+    Money money = (Money) o;
 
     if (oneCentCount != money.oneCentCount) {
       return false;
