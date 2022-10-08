@@ -108,4 +108,8 @@ public class SnackMachine implements org.jmolecules.ddd.types.AggregateRoot<Snac
 
   public void addSnack(String snack) {
   }
+
+  public List<Slot> slots() {
+    return slots;
+  }
 }

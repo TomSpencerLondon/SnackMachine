@@ -15,33 +15,16 @@
         method="post"
   >
     <div class="grid grid-cols-3">
+      <th:block th:each="slot, iter : ${machine.slotViews}">
       <div>
         <input type="radio"
-               value="1"
-               id="choice1"
+               th:value="${iter.count}"
+               th:id="'choice-' + ${iter.count}"
                name="position"
                checked="checked"/>
         <label
             class="radio"
-            for="choice1">Coke</label>
-      </div>
-      <div>
-        <input type="radio"
-               value="2"
-               id="choice2"
-               name="position"/>
-        <label
-            class="radio"
-            for="choice2">Crisps</label>
-      </div>
-      <div>
-        <input type="radio"
-               value="3"
-               id="choice3"
-               name="position"/>
-        <label
-            class="radio"
-            for="choice2">Chocolate</label>
+            th:for="'choice' + ${iter.count}" th:text="${slot.snack}">Coke</label>
       </div>
     </div>
     <button class="bg-lime-500 hover:bg-lime-700 text-white font-bold mt-4 py-2 px-4 border border-lime-700 rounded"

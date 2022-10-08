@@ -15,4 +15,8 @@ public class Snack implements AggregateRoot<Snack, SnackId> {
   public SnackId getId() {
     return id;
   }
+
+  public String name() {
+    return name;
+  }
 }

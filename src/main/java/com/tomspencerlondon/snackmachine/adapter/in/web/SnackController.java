@@ -35,24 +35,6 @@ public class SnackController {
     return "index";
   }
 
-  @GetMapping("/snack-machine/{id}/admin")
-  public String admin(Model model, @PathVariable("id") Long id) {
-    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
-    SnackMachineView snackMachineView = snackMachine.map(SnackMachineView::from)
-        .orElseThrow(SnackMachineUnavailable::new);
-    model.addAttribute("machine", snackMachineView);
-    return "admin";
-  }
-
-  @PostMapping("/snack-machine/{id}/add-snack")
-  public String addSnack(@RequestParam(name="snack") String snack, @PathVariable("id") Long id) {
-    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
-
-    snackMachine.ifPresent(sn -> sn.addSnack(snack));
-
-    return "redirect:/snack-machine/" + id + "/admin";
-  }
-
   @GetMapping("/snack-machine/{id}")
   public String snackMachine(Model model, @PathVariable("id") Long id) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
@@ -75,7 +57,7 @@ public class SnackController {
     try {
       snackMachine.ifPresent(sn -> sn.buySnack(position));
     } catch (NoSnacksAvailable e) {
-      return "redirect:/snack-machine/" + id + "/admin/";
+      return "redirect:/admin/snack-machine/" + id;
     }
     return "redirect:/snack-machine/" + id;
   }
