@@ -24,7 +24,9 @@
                checked="checked"/>
         <label
             class="radio"
-            th:for="'choice' + ${iter.count}" th:text="${slot.snack}">Coke</label>
+            th:for="'choice' + ${iter.count}"
+            th:text="${slot.getQuantity()} + ' ' + ${slot.snack} + ' ($' + ${slot.getPrice()} + ')'">
+        </label>
       </div>
     </div>
     <button class="bg-lime-500 hover:bg-lime-700 text-white font-bold mt-4 py-2 px-4 border border-lime-700 rounded"

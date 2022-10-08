@@ -37,12 +37,12 @@ public class SnackMachine implements org.jmolecules.ddd.types.AggregateRoot<Snac
     Optional<Slot> slot = getSlot(position);
 
     if (slot.isEmpty()) {
-      throw new IllegalArgumentException();
+      throw new NoSnacksAvailable();
     }
 
     slot.ifPresent(s -> {
       if (s.snackPile().price() > moneyInTransaction.amount()) {
-        throw new IllegalArgumentException();
+        throw new NotEnoughMoney();
       }
     });
 

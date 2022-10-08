@@ -3,6 +3,7 @@ package com.tomspencerlondon.snackmachine.adapter.in.web;
 import com.tomspencerlondon.snackmachine.hexagon.application.SnackService;
 import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
 import com.tomspencerlondon.snackmachine.hexagon.domain.NoSnacksAvailable;
+import com.tomspencerlondon.snackmachine.hexagon.domain.NotEnoughMoney;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachineId;
 import java.util.List;
@@ -58,6 +59,8 @@ public class SnackController {
       snackMachine.ifPresent(sn -> sn.buySnack(position));
     } catch (NoSnacksAvailable e) {
       return "redirect:/admin/snack-machine/" + id;
+    } catch (NotEnoughMoney e) {
+      return "redirect:/snack-machine/" + id;
     }
     return "redirect:/snack-machine/" + id;
   }
