@@ -2,18 +2,11 @@ package com.tomspencerlondon.snackmachine.hexagon.domain;
 
 import org.jmolecules.ddd.types.ValueObject;
 
-public class SnackPile implements ValueObject {
-  private final Snack snack;
-  private final int quantity;
-  private final double price;
+public record SnackPile(Snack snack, int quantity, double price) implements ValueObject {
 
-  public SnackPile(Snack snack, int quantity, double price) {
+  public SnackPile {
     requirePositiveQuantity(quantity);
     requirePositivePrice(price);
-
-    this.snack = snack;
-    this.quantity = quantity;
-    this.price = price;
   }
 
   private void requirePositivePrice(double price) {
@@ -26,18 +19,6 @@ public class SnackPile implements ValueObject {
     if (quantity < 0) {
       throw new IllegalArgumentException();
     }
-  }
-
-  public Snack snack() {
-    return snack;
-  }
-
-  public int quantity() {
-    return quantity;
-  }
-
-  public double price() {
-    return price;
   }
 
   public SnackPile reduceQuantity() {
@@ -67,14 +48,4 @@ public class SnackPile implements ValueObject {
     return snack.equals(snackPile.snack);
   }
 
-  @Override
-  public int hashCode() {
-    int result;
-    long temp;
-    result = snack.hashCode();
-    result = 31 * result + quantity;
-    temp = Double.doubleToLongBits(price);
-    result = 31 * result + (int) (temp ^ (temp >>> 32));
-    return result;
-  }
 }

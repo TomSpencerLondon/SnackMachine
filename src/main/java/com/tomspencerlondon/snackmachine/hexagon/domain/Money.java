@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import org.jmolecules.ddd.types.ValueObject;
 
-public class Money implements ValueObject {
+public record Money(int oneCentCount, int fiveCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount) implements ValueObject {
 
   public static Money ZERO = new Money(0, 0, 0, 0, 0, 0, 0);
   public static Money ONE_CENT = new Money(1, 0, 0, 0, 0, 0, 0);
@@ -15,27 +15,12 @@ public class Money implements ValueObject {
   public static Money FIVE_DOLLAR = new Money(0, 0, 0, 0, 0, 1, 0);
   public static Money TWENTY_DOLLAR = new Money(0, 0, 0, 0, 0, 0, 1);
 
-  private final int oneCentCount;
-  private final int fiveCentCount;
-  private final int tenCentCount;
-  private final int quarterCount;
-  private final int oneDollarCount;
-  private final int fiveDollarCount;
-  private final int twentyDollarCount;
-
-  public Money(int oneCentCount, int fiveCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
+  public Money {
     requirePositiveCount(
         oneCentCount, fiveCentCount,
         tenCentCount, quarterCount,
         oneDollarCount, fiveDollarCount,
         twentyDollarCount);
-    this.oneCentCount = oneCentCount;
-    this.fiveCentCount = fiveCentCount;
-    this.tenCentCount = tenCentCount;
-    this.quarterCount = quarterCount;
-    this.oneDollarCount = oneDollarCount;
-    this.fiveDollarCount = fiveDollarCount;
-    this.twentyDollarCount = twentyDollarCount;
   }
 
   public static Money multiply(Money money, int multiplicand) {
