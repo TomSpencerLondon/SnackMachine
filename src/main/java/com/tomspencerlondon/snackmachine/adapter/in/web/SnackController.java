@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,31 +25,50 @@ public class SnackController {
 
   @GetMapping("/")
   public String index(Model model) {
-    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(1L));
-    SnackMachineView snackMachineView = snackMachine.map(SnackMachineView::from)
-        .orElseThrow(SnackMachineUnavailable::new);
-    model.addAttribute("machine", snackMachineView);
+    model.addAttribute("machines", snackService.findAll());
     return "index";
   }
 
-  @PostMapping("/insert")
-  public String insert(@RequestParam(name="coin") String coin) {
-    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(1L));
-    snackMachine.ifPresent(sn -> sn.insertMoney(MoneyView.from(coin)));
-    return "redirect:/";
+  @GetMapping("/{id}")
+  public String snackMachine(Model model, @PathVariable("id") Long id) {
+    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
+    SnackMachineView snackMachineView = snackMachine.map(SnackMachineView::from)
+        .orElseThrow(SnackMachineUnavailable::new);
+    model.addAttribute("machine", snackMachineView);
+    return "snack-machine";
   }
 
-  @PostMapping("/buy")
-  public String buy() {
-    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(1L));
+  @PostMapping("/{id}/insert")
+  public String insert(@RequestParam(name="coin") String coin, @PathVariable("id") Long id) {
+    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
+    snackMachine.ifPresent(sn -> sn.insertMoney(toMoney(coin)));
+    return "redirect:/" + id;
+  }
+
+  @PostMapping("/{id}/buy")
+  public String buy(@PathVariable("id") Long id) {
+    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
     snackMachine.ifPresent(sn -> sn.buySnack(1));
-    return "redirect:/";
+    return "redirect:/" + id;
   }
 
-  @PostMapping("/return")
-  public String returnMoney() {
-    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(1L));
+  @PostMapping("/{id}/return")
+  public String returnMoney(@PathVariable("id") Long id) {
+    Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
     snackMachine.ifPresent(SnackMachine::returnMoney);
-    return "redirect:/";
+    return "redirect:/" + id;
+  }
+
+  private Money toMoney(String coin) {
+    return switch (coin) {
+      case "1_C" -> Money.ONE_CENT;
+      case "5_C" -> Money.FIVE_CENT;
+      case "10_C" -> Money.TEN_CENT;
+      case "25_C" -> Money.QUARTER_CENT;
+      case "1_D" -> Money.ONE_DOLLAR;
+      case "5_D" -> Money.FIVE_DOLLAR;
+      case "20_D" -> Money.TWENTY_DOLLAR;
+      default -> Money.ZERO;
+    };
   }
 }

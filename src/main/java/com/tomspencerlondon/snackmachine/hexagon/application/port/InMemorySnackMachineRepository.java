@@ -2,6 +2,7 @@ package com.tomspencerlondon.snackmachine.hexagon.application.port;
 
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachineId;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,6 +27,11 @@ public class InMemorySnackMachineRepository implements SnackMachineRepository {
     snackMachines.put(snackMachine.getId(), snackMachine);
     saveCount++;
     return snackMachine;
+  }
+
+  @Override
+  public List<SnackMachine> findAll() {
+    return List.copyOf(snackMachines.values());
   }
 
   public int saveCount() {

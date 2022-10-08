@@ -1,14 +1,15 @@
 package com.tomspencerlondon.snackmachine.hexagon.application;
 
-import com.tomspencerlondon.snackmachine.hexagon.application.port.InMemorySnackMachineRepository;
+import com.tomspencerlondon.snackmachine.hexagon.application.port.SnackMachineRepository;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachineId;
+import java.util.List;
 import java.util.Optional;
 
 public class SnackService {
-  private InMemorySnackMachineRepository repository;
+  private SnackMachineRepository repository;
 
-  public SnackService(InMemorySnackMachineRepository repository) {
+  public SnackService(SnackMachineRepository repository) {
     this.repository = repository;
   }
 
@@ -16,7 +17,8 @@ public class SnackService {
     return repository.findById(id);
   }
 
-  public void save(SnackMachineId id) {
 
+  public List<SnackMachine> findAll() {
+    return repository.findAll();
   }
 }
