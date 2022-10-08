@@ -12,7 +12,7 @@ public class SnackMachineTest {
 
   @Test
   void return_money_empties_money_in_transaction() {
-    SnackMachine snackMachine = new SnackMachine(List.of(new Slot(new SnackPile(new Snack("Coke"), 10, 0.0), 1), new Slot(new SnackPile(new Snack("Crisps"), 10, 0.0), 2), new Slot(new SnackPile(new Snack("Chocolate"), 10, 0.0), 3)));
+    SnackMachine snackMachine = new SnackMachine(List.of(new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Coke"), 10, 0.0), 1), new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Crisps"), 10, 0.0), 2), new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Chocolate"), 10, 0.0), 3)));
     snackMachine.insertMoney(new Money(0, 0, 0, 1, 0, 0, 0));
 
     snackMachine.returnMoney();
@@ -23,7 +23,7 @@ public class SnackMachineTest {
 
   @Test
   void inserted_money_goes_to_money_in_transaction() {
-    SnackMachine snackMachine = new SnackMachine(List.of(new Slot(new SnackPile(new Snack("Coke"), 10, 0.0), 1), new Slot(new SnackPile(new Snack("Crisps"), 10, 0.0), 2), new Slot(new SnackPile(new Snack("Chocolate"), 10, 0.0), 3)));
+    SnackMachine snackMachine = new SnackMachine(List.of(new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Coke"), 10, 0.0), 1), new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Crisps"), 10, 0.0), 2), new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Chocolate"), 10, 0.0), 3)));
 
     snackMachine.insertMoney(Money.ONE_CENT);
     snackMachine.insertMoney(Money.ONE_DOLLAR);
@@ -34,7 +34,7 @@ public class SnackMachineTest {
 
   @Test
   void cannot_insert_more_than_one_coin_or_note_at_a_time() {
-    SnackMachine snackMachine = new SnackMachine(List.of(new Slot(new SnackPile(new Snack("Coke"), 10, 0.0), 1), new Slot(new SnackPile(new Snack("Crisps"), 10, 0.0), 2), new Slot(new SnackPile(new Snack("Chocolate"), 10, 0.0), 3)));
+    SnackMachine snackMachine = new SnackMachine(List.of(new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Coke"), 10, 0.0), 1), new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Crisps"), 10, 0.0), 2), new Slot(SlotId.of(1L), new SnackPile(new Snack(SnackId.of(1L), "Chocolate"), 10, 0.0), 3)));
     Money twoCent = plus(Money.ONE_CENT, Money.ONE_CENT);
 
     assertThatThrownBy(() -> snackMachine.insertMoney(twoCent))
@@ -43,8 +43,8 @@ public class SnackMachineTest {
 
   @Test
   void buySnack_trades_inserted_money_for_a_snack() {
-    SnackPile coke = new SnackPile(new Snack("Coke"), 10, 0.0);
-    List<Slot> slots = List.of(new Slot(coke, 1));
+    SnackPile coke = new SnackPile(new Snack(SnackId.of(1L), "Coke"), 10, 0.0);
+    List<Slot> slots = List.of(new Slot(SlotId.of(1L), coke, 1));
     SnackMachine snackMachine = new SnackMachine(slots);
     snackMachine.insertMoney(Money.ONE_DOLLAR);
 

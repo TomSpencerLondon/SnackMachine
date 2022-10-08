@@ -2,9 +2,9 @@ package com.tomspencerlondon.snackmachine.hexagon.domain;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import org.jmolecules.ddd.types.Identifier;
 
-public class SnackMachine extends AggregateRoot {
+public class SnackMachine implements org.jmolecules.ddd.types.AggregateRoot<SnackMachine, Identifier> {
   private SnackMachineId snackMachineId;
   private final List<Money> accepted = List.of(Money.ONE_CENT, Money.TEN_CENT, Money.QUARTER_CENT, Money.ONE_DOLLAR, Money.FIVE_DOLLAR, Money.TWENTY_DOLLAR);
   private List<Slot> slots;
@@ -93,8 +93,9 @@ public class SnackMachine extends AggregateRoot {
     return snackMachineId != null ? snackMachineId.hashCode() : 0;
   }
 
-  public SnackMachineId getId() {
-    return snackMachineId;
+  @Override
+  public Identifier getId() {
+    return this.snackMachineId;
   }
 
   public void setId(SnackMachineId id) {

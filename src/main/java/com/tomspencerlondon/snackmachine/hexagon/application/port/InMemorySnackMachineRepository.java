@@ -6,9 +6,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import org.jmolecules.ddd.types.Identifier;
 
 public class InMemorySnackMachineRepository implements SnackMachineRepository {
-  private final Map<SnackMachineId, SnackMachine> snackMachines = new ConcurrentHashMap<>();
+  private final Map<Identifier, SnackMachine> snackMachines = new ConcurrentHashMap<>();
   private final AtomicLong sequence = new AtomicLong(1);
   private int saveCount = 0;
 

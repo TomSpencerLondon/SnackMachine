@@ -1,11 +1,15 @@
 package com.tomspencerlondon.snackmachine.hexagon.domain;
 
-public class Slot extends Entity {
+import org.jmolecules.ddd.types.Entity;
 
+public class Slot implements Entity<SnackMachine, SlotId> {
+
+  private SlotId slotId;
   private SnackPile snackPile;
   private final int position;
 
-  public Slot(SnackPile snackPile, int position) {
+  public Slot(SlotId slotId, SnackPile snackPile, int position) {
+    this.slotId = slotId;
     this.snackPile = snackPile;
     this.position = position;
   }
@@ -32,5 +36,10 @@ public class Slot extends Entity {
 
   public void reduceQuantity() {
     snackPile = snackPile.reduceQuantity();
+  }
+
+  @Override
+  public SlotId getId() {
+    return slotId;
   }
 }

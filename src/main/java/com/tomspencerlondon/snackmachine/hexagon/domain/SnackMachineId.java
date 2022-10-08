@@ -1,6 +1,8 @@
 package com.tomspencerlondon.snackmachine.hexagon.domain;
 
-public record SnackMachineId(long id) {
+import org.jmolecules.ddd.types.Identifier;
+
+public record SnackMachineId(long id) implements Identifier {
   public static SnackMachineId of(long id) {
     return new SnackMachineId(id);
   }
