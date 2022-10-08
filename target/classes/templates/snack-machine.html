@@ -11,7 +11,7 @@
 <main class="mt-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
   <div class="mx-auto max-w-3xl">
   <h1 class="mb-4 text-3xl font-bold uppercase">Snack Machine</h1>
-  <form class="mb-4" th:action="@{/buy}"
+  <form class="mb-4" th:action="@{/snack-machine/__${machine.id}__/buy}"
         method="post"
   >
     <div class="grid grid-cols-3">
@@ -44,7 +44,7 @@
   </form>
   <h2 class="mb-4 text-2xl">Money Inserted</h2>
   <h2 class="mt-4 mb-4 text-2xl" th:text="${machine.moneyInserted}">$10</h2>
-  <form th:action="@{/insert}"
+  <form th:action="@{/snack-machine/__${machine.id}__/insert}"
         method="post"
   >
     <div class="grid grid-cols-3">
@@ -74,7 +74,7 @@
       </button>
     </div>
   </form>
-  <form th:action="@{/return}"
+  <form th:action="@{/snack-machine/__${machine.id}__/return}"
         method="post"
   >
     <div class="mx-auto">

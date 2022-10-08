@@ -93,12 +93,16 @@ public class SnackMachine implements org.jmolecules.ddd.types.AggregateRoot<Snac
     return snackMachineId != null ? snackMachineId.hashCode() : 0;
   }
 
-  @Override
-  public Identifier getId() {
-    return this.snackMachineId;
+  public Long id() {
+    return this.snackMachineId.id();
   }
 
   public void setId(SnackMachineId id) {
     this.snackMachineId = id;
+  }
+
+  @Override
+  public Identifier getId() {
+    return this.snackMachineId;
   }
 }

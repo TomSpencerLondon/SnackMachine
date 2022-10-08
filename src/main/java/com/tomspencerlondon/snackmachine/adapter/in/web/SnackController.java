@@ -38,25 +38,25 @@ public class SnackController {
     return "snack-machine";
   }
 
-  @PostMapping("/{id}/insert")
+  @PostMapping("/snack-machine/{id}/insert")
   public String insert(@RequestParam(name="coin") String coin, @PathVariable("id") Long id) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
     snackMachine.ifPresent(sn -> sn.insertMoney(toMoney(coin)));
-    return "redirect:/" + id;
+    return "redirect:/snack-machine/" + id;
   }
 
-  @PostMapping("/{id}/buy")
+  @PostMapping("/snack-machine/{id}/buy")
   public String buy(@PathVariable("id") Long id) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
     snackMachine.ifPresent(sn -> sn.buySnack(1));
-    return "redirect:/" + id;
+    return "redirect:/snack-machine/" + id;
   }
 
-  @PostMapping("/{id}/return")
+  @PostMapping("/snack-machine/{id}/return")
   public String returnMoney(@PathVariable("id") Long id) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
     snackMachine.ifPresent(SnackMachine::returnMoney);
-    return "redirect:/" + id;
+    return "redirect:/snack-machine/" + id;
   }
 
   private Money toMoney(String coin) {
