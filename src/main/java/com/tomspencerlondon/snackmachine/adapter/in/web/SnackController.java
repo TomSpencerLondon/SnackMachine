@@ -29,7 +29,7 @@ public class SnackController {
     return "index";
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/snack-machine/{id}")
   public String snackMachine(Model model, @PathVariable("id") Long id) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
     SnackMachineView snackMachineView = snackMachine.map(SnackMachineView::from)
