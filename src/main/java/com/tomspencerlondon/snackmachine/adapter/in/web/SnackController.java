@@ -4,6 +4,7 @@ import com.tomspencerlondon.snackmachine.hexagon.application.SnackService;
 import com.tomspencerlondon.snackmachine.hexagon.domain.Money;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachine;
 import com.tomspencerlondon.snackmachine.hexagon.domain.SnackMachineId;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,11 @@ public class SnackController {
 
   @GetMapping("/")
   public String index(Model model) {
-    model.addAttribute("machines", snackService.findAll());
+    List<SnackMachineView> snackMachineViews = snackService
+        .findAll()
+        .stream()
+        .map(SnackMachineView::from).toList();
+    model.addAttribute("machines", snackMachineViews);
     return "index";
   }
 
