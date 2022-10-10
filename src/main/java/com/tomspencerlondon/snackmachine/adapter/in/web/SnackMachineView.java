@@ -45,4 +45,8 @@ public class SnackMachineView {
   public List<SlotView> getSlotViews() {
     return slotViews;
   }
+
+  SlotView getSlotView(Integer position) {
+    return getSlotViews().get(position - 1);
+  }
 }

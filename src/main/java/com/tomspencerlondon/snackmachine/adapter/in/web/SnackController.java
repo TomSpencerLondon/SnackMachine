@@ -53,14 +53,20 @@ public class SnackController {
   }
 
   @PostMapping("/snack-machine/{id}/buy")
-  public String buy(@RequestParam(name="position") Integer position, @PathVariable("id") Long id) {
+  public String buy(@RequestParam(name="position") Integer position, @PathVariable("id") Long id, Model model) {
     Optional<SnackMachine> snackMachine = snackService.findById(SnackMachineId.of(id));
+    SnackMachineView snackMachineView = snackMachine.map(SnackMachineView::from)
+        .orElseThrow(SnackMachineUnavailable::new);
+    model.addAttribute("machine", snackMachineView);
     try {
       snackMachine.ifPresent(sn -> sn.buySnack(position));
     } catch (NoSnacksAvailable e) {
-      return "redirect:/admin/snack-machine/" + id;
+      SlotView slotView = snackMachineView.getSlotView(position);
+      model.addAttribute("error", "No " + slotView.getSnack() + " left");
+      return "snack-machine";
     } catch (NotEnoughMoney e) {
-      return "redirect:/snack-machine/" + id;
+      model.addAttribute("error", "Not enough money added");
+      return "snack-machine";
     }
     return "redirect:/snack-machine/" + id;
   }
